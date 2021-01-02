@@ -1,0 +1,77 @@
+@keyframes timeline {
+    0% {
+        width: 100%;
+    }
+    100% {
+        width: 0%;
+    }
+}
+#navbar{
+    font-size: 22px;
+    font-family: 'Roboto';
+}
+#time-line{
+    margin-top: auto;
+    color: #dbd521;
+    background-color: #dbd521;
+    height: 4px;
+    text-align: center;
+    animation: timeline 30s;
+    animation-fill-mode: forwards;
+}
+#title{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    font-size: 27px;
+}
+#man{
+    position: absolute;
+    left: 34%;
+    top: 37%;
+    white-space: pre-wrap;
+    font-size: 40px;
+    font-weight: bold;
+    color: #d0d6d2;
+}
+#used-word-box{
+    position: absolute;
+    width: 350px;
+    padding: 60px;
+    top: 22%; 
+    left: 58%;
+    text-align: left;
+}
+#word-box{
+    position: absolute;
+    border: none;
+    width: 700px;
+    padding: 30px;
+    top: 70%; 
+    left: 10%;
+}
+#guess-form{
+    width: 400px;
+    left: 60%;
+}
+#menu-buttons{
+    width: 200px;
+}
+#bg-darkness{
+    filter: brightness(95%);
+}
+#bg-circle{
+    filter: brightness(95%);
+}
+.word{
+    font-size: 40px;   
+    text-align: center;
+}
+.gallows{
+    position: absolute;
+    left: 22%;
+    top: 20%;
+    width: 315px;
+    height: 315px;
+}
