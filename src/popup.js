@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import link from './backendLink';
 import './game.css';
 
 export default class popupForm extends Component {
@@ -19,8 +20,8 @@ export default class popupForm extends Component {
         var categ = document.getElementById("category").value;
         var word = document.getElementById("word").value;
 
-        const response1 = await axios.get("/api/setValue.php?column=title&value=" + categ);
-        const response2 = await axios.get("/api/setValue.php?column=selectedword&value="+word);
+        const response1 = await axios.get(link + "/setValue.php?column=title&value=" + categ);
+        const response2 = await axios.get(link + "/setValue.php?column=selectedword&value="+word);
 
         console.log(response1);
         console.log(response2);

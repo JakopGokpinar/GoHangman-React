@@ -14,12 +14,11 @@ export default class menu extends Component {
         username : "",
         isSearching : false,
         isMatchFind : false,
-        playMusic : false,
+        playMusic : true,
     }
 
     audio = new Audio("/music.mp3");
     startMusic = () => {
-        console.log(link)
         if(this.state.playMusic)
             this.audio.play();
     }
@@ -31,7 +30,7 @@ export default class menu extends Component {
     register = async (dispatch,e) => {
         e.preventDefault();
 
-        const response = await axios.get("/api/register.php?username="+this.state.username);
+        const response = await axios.get(link + "/register.php?username="+this.state.username);
         dispatch({type:"REGISTER_USER",payload:response.data});
         console.log(response["data"]);
         if(response["data"] === "register successful"){
@@ -54,7 +53,7 @@ export default class menu extends Component {
     
     findMatch = async () => {
         console.log("searching");
-        const response = await axios.get("/api/findMatch.php");
+        const response = await axios.get(link + "/findMatch.php");
         if(response["data"].includes("match find")){
             var arr = response["data"].split(",");
             if(arr[1] === "asker"){

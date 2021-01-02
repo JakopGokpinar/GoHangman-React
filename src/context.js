@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import link from './backendLink';
 
 const UserContext = React.createContext();
 
@@ -24,7 +25,7 @@ export class UserProvider extends Component {
         }
       }
       componentDidMount = async () => {
-        const response = await axios.get("/api/");
+        const response = await axios.get(link);
         console.log(response);
         this.setState({
           isConnected : true

@@ -7,6 +7,7 @@ import GuessForm from './guessForm';
 import Popup from './popup';
 import {asker} from './mainMenu';
 import './game.css';
+import link from './backendLink';
 
 
 export default class game extends Component {
@@ -57,7 +58,7 @@ export default class game extends Component {
         var line = document.getElementById("time-line");
         if(line.offsetWidth === 0){
             if(!this.state.isAsker){
-                const res = await axios.get("/api/setValue.php?column=bodyindex");
+                const res = await axios.get(link + "/setValue.php?column=bodyindex");
                 console.log(res["data"]);
             }
             line.style.webkitAnimation = 'none';
@@ -109,7 +110,7 @@ export default class game extends Component {
 }
 
 var getValues = async function getValues() {
-    var response = await axios.get("/api/getValues.php");
+    var response = await axios.get(link + "/getValues.php");
 
     if(response["data"] !== "values failed"){
         const {usedWords,selectedWord} = this.state;
@@ -159,8 +160,8 @@ var makeGuess = async function makeGuess(){
         if(selectedWord.indexOf(guess) !== -1){
             for (let i = 0; i < selectedWord.length; i++) {
                 if(guess === selectedWord[i]){
-                    const res = await axios.get("/api/setValue.php?column=guessedword&value=" + guess);
-                    const res2 = await axios.get("/api/setValue.php?column=guessedindex&value=" + i);
+                    const res = await axios.get(link + "/setValue.php?column=guessedword&value=" + guess);
+                    const res2 = await axios.get(link + "/setValue.php?column=guessedindex&value=" + i);
                     console.log(res);
                     console.log(res2)
                 }
@@ -171,17 +172,17 @@ var makeGuess = async function makeGuess(){
                 return alert("You tried that letter!");
             }
             let bodyindex = parseInt(bodyIndex) + 1;
-            const res = await axios.get("/api/setValue.php?column=usedword&value=" + guess);
-            const res2 = await axios.get("/api/setValue.php?column=bodyindex&value=" + bodyindex);
+            const res = await axios.get(link + "/setValue.php?column=usedword&value=" + guess);
+            const res2 = await axios.get(link + "/setValue.php?column=bodyindex&value=" + bodyindex);
             console.log(res);
             console.log(res2);
         }
 
-        const res3 = await axios.get("/api/setValue.php?column=linestatus&value=true");
+        const res3 = await axios.get(link + "/setValue.php?column=linestatus&value=true");
         console.log(res3);
 
         setTimeout(async function() {
-            const res4 = await axios.get("/api/setValue.php?column=linestatus&value=false");
+            const res4 = await axios.get(link + "/setValue.php?column=linestatus&value=false");
             console.log(res4);
         }, 1000)
         if(!this.state.isAsker){
@@ -207,7 +208,7 @@ var checkRoundFinish = async function checkRoundFinish() {
     if(bodyIndex >= 6){
 
         if(!isAsker){
-            const a = await axios.get("/api/setScore.php?condition=lose");
+            const a = await axios.get(link + "/setScore.php?condition=lose");
             console.log(a["data"])
             console.log("you lose")
         }
@@ -230,7 +231,7 @@ var checkRoundFinish = async function checkRoundFinish() {
         }
        // }
         if(!isAsker){
-            const b =  await axios.get("/api/setScore.php?condition=win");
+            const b =  await axios.get(link + "/setScore.php?condition=win");
             console.log(b["data"])
             console.log("you won")
         }
@@ -250,10 +251,10 @@ var checkRoundFinish = async function checkRoundFinish() {
 var checkGameOver = async function checkGameOver(){
     const {score1,score2} = this.state;
     
-    if(parseInt(score1) >= 3 || parseInt(score2) >= 3){
+    if(parseInt(score1) >= 100 || parseInt(score2) >= 100){
         
         console.log("over")
-        const response = await axios.get("/api/gameOver.php")
+        const response = await axios.get(link + "/gameOver.php")
         console.log(response["data"])
         if(response["data"].includes("won game")){
             console.log("won")
